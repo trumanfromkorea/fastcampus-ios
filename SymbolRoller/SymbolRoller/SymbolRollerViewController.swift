@@ -19,8 +19,9 @@ class SymbolRollerViewController: UIViewController {
     // 화면이 보여지기 전에 준비를 하는 시간
     override func viewDidLoad() {
         super.viewDidLoad()
-
         reload()
+        // 왜 로드될때 색이 적용 안되는가?
+        button.tintColor = UIColor.systemPink
     }
 
     // 화면이 보여질 준비가 되었을때
