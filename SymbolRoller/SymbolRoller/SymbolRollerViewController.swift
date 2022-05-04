@@ -21,7 +21,9 @@ class SymbolRollerViewController: UIViewController {
         super.viewDidLoad()
         reload()
         // 왜 로드될때 색이 적용 안되는가?
-        button.tintColor = UIColor.systemPink
+        button.setImage(UIImage(named: "")?.withRenderingMode(.alwaysTemplate), for: .normal)
+//
+//        button.tintColor = UIColor.systemYellow
     }
 
     // 화면이 보여질 준비가 되었을때
@@ -43,6 +45,7 @@ class SymbolRollerViewController: UIViewController {
 
         // return 값은 optional
         let symbol = symbols.randomElement()!
+        
         imageView.image = UIImage(systemName: symbol)
         label.text = symbol
     }
