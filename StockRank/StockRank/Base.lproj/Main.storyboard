@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="whD-S1-J31">
-                                <rect key="frame" x="0.0" y="384" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mjD-LZ-yQl">
                                     <size key="itemSize" width="385" height="128"/>
@@ -91,6 +91,13 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="385" height="128"/>
+                                        <connections>
+                                            <outlet property="companyIconImageView" destination="AQs-I6-359" id="3SS-Cw-6n7"/>
+                                            <outlet property="companyNameLabel" destination="syr-O0-25P" id="ScJ-ME-gXp"/>
+                                            <outlet property="companyPriceLabel" destination="h0v-gA-lli" id="SJI-RC-Ast"/>
+                                            <outlet property="diffLabel" destination="8ib-f4-Sfj" id="ePg-Ij-pmJ"/>
+                                            <outlet property="rankLabel" destination="5xf-sa-ZSW" id="zXS-J8-ohD"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -99,8 +106,8 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="VMA-ve-a2I" firstAttribute="trailing" secondItem="whD-S1-J31" secondAttribute="trailing" id="35Y-j8-RV6"/>
-                            <constraint firstItem="VMA-ve-a2I" firstAttribute="bottom" secondItem="whD-S1-J31" secondAttribute="bottom" constant="350" id="OaW-Cr-bzP"/>
-                            <constraint firstItem="whD-S1-J31" firstAttribute="top" secondItem="VMA-ve-a2I" secondAttribute="top" constant="340" id="osS-qK-9fe"/>
+                            <constraint firstItem="VMA-ve-a2I" firstAttribute="bottom" secondItem="whD-S1-J31" secondAttribute="bottom" id="OaW-Cr-bzP"/>
+                            <constraint firstItem="whD-S1-J31" firstAttribute="top" secondItem="VMA-ve-a2I" secondAttribute="top" id="osS-qK-9fe"/>
                             <constraint firstItem="whD-S1-J31" firstAttribute="leading" secondItem="VMA-ve-a2I" secondAttribute="leading" id="qtz-jF-MZ7"/>
                         </constraints>
                     </view>

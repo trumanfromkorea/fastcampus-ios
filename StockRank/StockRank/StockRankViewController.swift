@@ -33,16 +33,30 @@ extension StockRankViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return stockList.count
     }
-    
+
     // cell 을 어떻게 표현할지에 대한 메소드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         // 재사용 가능한 cell 을 가져오는것
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StockRankCollectionViewCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StockRankCollectionViewCell", for: indexPath) as? StockRankCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         
+        // guard 꼭 참이어야 하는 조건 else { ... }
+
+        // 각 cell 을 어떻게 표현할지, 해당하는 데이터 넘겨줌
+        let stock = stockList[indexPath.item]
+        cell.configure(stock)
+
+        // cell 을 업데이터하고 리턴
         return cell
     }
 }
 
 extension StockRankViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // width == collectionView
+        // height 80
+
+        return CGSize(width: collectionView.bounds.width, height: 80)
+    }
 }
