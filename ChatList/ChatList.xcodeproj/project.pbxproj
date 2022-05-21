@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DB9C5EA28390E4300686201 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB9C5E928390E4300686201 /* ChatListViewController.swift */; };
 		947AAB9E281045C700357C53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AAB9D281045C700357C53 /* AppDelegate.swift */; };
 		947AABA0281045C700357C53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AAB9F281045C700357C53 /* SceneDelegate.swift */; };
 		947AABA5281045C700357C53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947AABA3281045C700357C53 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DB9C5E928390E4300686201 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		947AAB9A281045C700357C53 /* ChatList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		947AAB9D281045C700357C53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		947AAB9F281045C700357C53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				947AAB9F281045C700357C53 /* SceneDelegate.swift */,
 				947AABD12810507F00357C53 /* Chat.swift */,
 				947AABA3281045C700357C53 /* Main.storyboard */,
+				0DB9C5E928390E4300686201 /* ChatListViewController.swift */,
 				947AABA6281045C800357C53 /* Assets.xcassets */,
 				947AABA8281045C800357C53 /* LaunchScreen.storyboard */,
 				947AABAB281045C800357C53 /* Info.plist */,
@@ -260,6 +263,7 @@
 			files = (
 				947AAB9E281045C700357C53 /* AppDelegate.swift in Sources */,
 				947AABD22810507F00357C53 /* Chat.swift in Sources */,
+				0DB9C5EA28390E4300686201 /* ChatListViewController.swift in Sources */,
 				947AABA0281045C700357C53 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
