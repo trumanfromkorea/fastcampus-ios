@@ -14,10 +14,16 @@ class ChatListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var chatLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+    
+    // 사용하기전에,, ?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        thumbnail.layer.cornerRadius = 10
+    }
 
     func configure(_ chat: Chat) {
         thumbnail.image = UIImage(named: chat.name)
-        thumbnail.layer.cornerRadius = 10
         nameLabel.text = chat.name
         chatLabel.text = chat.chat
         dateLabel.text = formattedDateString(chat.date)
