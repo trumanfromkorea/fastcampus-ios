@@ -20,14 +20,14 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eCd-vC-yP2">
                                 <rect key="frame" x="0.0" y="44" width="428" height="848"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FAY-mI-Rh3">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FAY-mI-Rh3">
                                     <size key="itemSize" width="428" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cCy-qX-r0s">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChatListCollectionViewCell" id="cCy-qX-r0s" customClass="ChatListCollectionViewCell" customModule="ChatList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GGG-T2-FJd">
@@ -42,20 +42,20 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwO-as-Weh">
-                                                    <rect key="frame" x="116" y="24" width="35" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                    <rect key="frame" x="115.99999999999999" y="24" width="31.333333333333329" height="21.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대화내용" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-uF-zQF">
-                                                    <rect key="frame" x="116" y="53" width="56" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="대화내용" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvO-uF-zQF">
+                                                    <rect key="frame" x="116.00000000000001" y="55.666666666666657" width="48.666666666666671" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ae-vr-5Xl">
-                                                    <rect key="frame" x="386" y="55" width="26" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="387.66666666666669" y="55.666666666666657" width="24.333333333333314" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -65,14 +65,20 @@
                                                 <constraint firstItem="FTn-sa-hZg" firstAttribute="leading" secondItem="GGG-T2-FJd" secondAttribute="leading" constant="16" id="CTx-0L-OPS"/>
                                                 <constraint firstItem="3ae-vr-5Xl" firstAttribute="centerY" secondItem="GGG-T2-FJd" secondAttribute="centerY" id="LfM-CU-1qM"/>
                                                 <constraint firstItem="jwO-as-Weh" firstAttribute="leading" secondItem="FTn-sa-hZg" secondAttribute="trailing" constant="20" id="P4p-kC-4FQ"/>
-                                                <constraint firstItem="3ae-vr-5Xl" firstAttribute="leading" secondItem="YvO-uF-zQF" secondAttribute="trailing" constant="214" id="Zoe-L4-szn"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3ae-vr-5Xl" secondAttribute="trailing" constant="10" id="dT0-yc-bcR"/>
+                                                <constraint firstItem="3ae-vr-5Xl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YvO-uF-zQF" secondAttribute="trailing" constant="10" id="Zoe-L4-szn"/>
+                                                <constraint firstAttribute="trailing" secondItem="3ae-vr-5Xl" secondAttribute="trailing" constant="16" id="dT0-yc-bcR"/>
                                                 <constraint firstItem="jwO-as-Weh" firstAttribute="top" secondItem="FTn-sa-hZg" secondAttribute="top" id="jSF-pr-bk2"/>
-                                                <constraint firstItem="YvO-uF-zQF" firstAttribute="top" secondItem="jwO-as-Weh" secondAttribute="bottom" constant="5" id="xtI-rh-tty"/>
+                                                <constraint firstItem="YvO-uF-zQF" firstAttribute="top" secondItem="jwO-as-Weh" secondAttribute="bottom" constant="10" id="xtI-rh-tty"/>
                                                 <constraint firstItem="FTn-sa-hZg" firstAttribute="centerY" secondItem="GGG-T2-FJd" secondAttribute="centerY" id="xzC-Mk-9O0"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="428" height="128"/>
+                                        <connections>
+                                            <outlet property="chatLabel" destination="YvO-uF-zQF" id="Sd1-LZ-LjK"/>
+                                            <outlet property="dateLabel" destination="3ae-vr-5Xl" id="9b5-nw-3fd"/>
+                                            <outlet property="nameLabel" destination="jwO-as-Weh" id="KJl-S3-465"/>
+                                            <outlet property="thumbnail" destination="FTn-sa-hZg" id="m7v-N0-0cX"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -86,6 +92,9 @@
                             <constraint firstItem="IVt-hL-poe" firstAttribute="bottom" secondItem="eCd-vC-yP2" secondAttribute="bottom" id="Yqt-EZ-noV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="eCd-vC-yP2" id="4eb-MW-yNm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXZ-ih-qtw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
