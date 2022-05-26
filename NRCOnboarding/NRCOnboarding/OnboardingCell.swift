@@ -14,7 +14,7 @@ class OnboardingCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
 
-    func conifigure(_ message: OnboardingMessage) {
+    func configure(_ message: OnboardingMessage) {
         thumbnailImageView.image = UIImage(named: message.imageName)
         titleLabel.text = message.title
         descriptionLabel.text = message.description

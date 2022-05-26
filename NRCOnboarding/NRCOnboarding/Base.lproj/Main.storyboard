@@ -20,10 +20,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_onboarding_bg" translatesAutoresizingMaskIntoConstraints="NO" id="PYr-4P-yja">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wy3-Sf-fG1">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wy3-Sf-fG1">
                                 <rect key="frame" x="0.0" y="44" width="414" height="652"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jIb-L9-hF9">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jIb-L9-hF9">
                                     <size key="itemSize" width="414" height="653"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -31,7 +31,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OnboardingCell" id="TQ6-lv-z43" customClass="OnboardingCell" customModule="NRCOnboarding" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="653"/>
+                                        <rect key="frame" x="0.0" y="-0.5" width="414" height="653"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cA2-aM-s9o">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="653"/>
@@ -50,7 +50,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npq-zM-e0C">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npq-zM-e0C">
                                                     <rect key="frame" x="50" y="501.5" width="314" height="81.5"/>
                                                     <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -125,6 +125,10 @@
                             <constraint firstItem="RwT-VX-nS8" firstAttribute="trailing" secondItem="Wy3-Sf-fG1" secondAttribute="trailing" id="tFT-mI-9Pr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Wy3-Sf-fG1" id="UIz-Ot-7Dh"/>
+                        <outlet property="pageControl" destination="jPe-Aj-W4P" id="Kst-aR-IX1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JDh-4s-Hys" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
