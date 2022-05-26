@@ -87,7 +87,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="206.5" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="JOIN NOW">
+                                        <buttonConfiguration key="configuration" style="plain" title="PREVIOUS">
                                             <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
@@ -96,10 +96,13 @@
                                         <rect key="frame" x="207.5" y="0.0" width="206.5" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="LOGIN">
+                                        <buttonConfiguration key="configuration" style="plain" title="NEXT">
                                             <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="onTappedNextButton:" destination="9fP-uz-Ko9" eventType="touchUpInside" id="b2q-GX-DXb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

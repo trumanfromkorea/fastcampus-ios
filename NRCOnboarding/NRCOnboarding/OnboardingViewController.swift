@@ -27,6 +27,8 @@ class OnboardingViewController: UIViewController {
         pageControl.numberOfPages = messages.count
         pageControl.currentPage = 0
     }
+
+    // button 으로 pageControl 조정하는법 알고싶다
 }
 
 extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
