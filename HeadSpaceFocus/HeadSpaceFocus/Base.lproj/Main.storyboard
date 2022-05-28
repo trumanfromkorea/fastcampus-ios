@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-IH-Cxf">
-                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="v7D-BQ-T5a">
                                     <size key="itemSize" width="390" height="173"/>
@@ -77,18 +77,37 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQX-Vf-1bE">
+                                <rect key="frame" x="30" y="760" width="330" height="50"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2Bb-N1-4RT"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="refreshButtonTapped:" destination="07K-eu-e7f" eventType="touchUpInside" id="uQb-oj-6Al"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xIF-vf-ToX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ezg-IH-Cxf" firstAttribute="leading" secondItem="xIF-vf-ToX" secondAttribute="leading" id="3V4-rL-Eqw"/>
+                            <constraint firstItem="iQX-Vf-1bE" firstAttribute="leading" secondItem="xIF-vf-ToX" secondAttribute="leading" constant="30" id="f40-Uu-kWm"/>
                             <constraint firstItem="xIF-vf-ToX" firstAttribute="trailing" secondItem="ezg-IH-Cxf" secondAttribute="trailing" id="nfj-Th-ptn"/>
                             <constraint firstAttribute="bottom" secondItem="ezg-IH-Cxf" secondAttribute="bottom" id="ofe-2i-EJT"/>
-                            <constraint firstItem="ezg-IH-Cxf" firstAttribute="top" secondItem="xIF-vf-ToX" secondAttribute="top" id="yH1-Xp-pga"/>
+                            <constraint firstItem="iQX-Vf-1bE" firstAttribute="centerX" secondItem="xIF-vf-ToX" secondAttribute="centerX" id="tws-WK-dXm"/>
+                            <constraint firstItem="xIF-vf-ToX" firstAttribute="bottom" secondItem="iQX-Vf-1bE" secondAttribute="bottom" id="ve2-LP-Isb"/>
+                            <constraint firstItem="ezg-IH-Cxf" firstAttribute="top" secondItem="Ndd-tE-Rzx" secondAttribute="top" id="yH1-Xp-pga"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="ezg-IH-Cxf" id="ULJ-Xf-Dux"/>
+                        <outlet property="refreshButton" destination="iQX-Vf-1bE" id="obB-In-Gns"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aqZ-hT-Jgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -100,6 +119,9 @@
         <image name="cloud.heavyrain.fill" catalog="system" width="125" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

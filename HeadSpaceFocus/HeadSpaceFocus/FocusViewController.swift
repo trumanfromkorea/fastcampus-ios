@@ -9,6 +9,7 @@ import UIKit
 
 class FocusViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var refreshButton: UIButton!
 
     typealias Item = Focus
 
@@ -16,13 +17,15 @@ class FocusViewController: UIViewController {
         case main
     }
 
+    var curated: Bool = false
     var items: [Focus] = Focus.list
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         collectionView.showsVerticalScrollIndicator = false
+        refreshButton.layer.cornerRadius = 10
 
         // datasource
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -37,13 +40,12 @@ class FocusViewController: UIViewController {
         })
 
         // data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items, toSection: .main)
-        dataSource.apply(snapshot)
+        updateSnapshot()
 
         // layout
         collectionView.collectionViewLayout = layout()
+
+        updateButtonTitle()
     }
 
     private func layout() -> UICollectionViewCompositionalLayout {
@@ -62,5 +64,25 @@ class FocusViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
+    }
+
+    func updateButtonTitle() {
+        let title = curated ? "See All" : "See Recommendation"
+        refreshButton.setTitle(title, for: .normal)
+    }
+    
+    func updateSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(items, toSection: .main)
+        dataSource.apply(snapshot)
+    }
+
+    @IBAction func refreshButtonTapped(_ sender: Any) {
+        curated.toggle()
+        items = curated ? Focus.recommendations : Focus.list
+
+        updateSnapshot()
+        updateButtonTitle()
     }
 }
