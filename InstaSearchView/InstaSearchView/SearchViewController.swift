@@ -7,29 +7,65 @@
 
 import UIKit
 
+enum Section {
+    case search
+    case home
+}
+
 class SearchViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
+
+    let list: [String] = (1 ... 24).map { "animal\($0)" }
+
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
 
     // data, presentation, layout
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
-        // cell 크기 지정하는대로 출력하기 위함
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = .zero
-        }
-
         navigationItem.title = "Search"
+
+        // diffable dataSource
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCell.identifier, for: indexPath) as? ResultCell else {
+                return nil
+            }
+
+            cell.configure(itemIdentifier)
+
+            return cell
+        })
+
+        // snapshot
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.search])
+        snapshot.appendItems(list, toSection: .search)
+        dataSource.apply(snapshot)
+
+        // layout
+        collectionView.collectionViewLayout = layout()
 
         let searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         searchController.searchResultsUpdater = self
-        
-        self.navigationItem.searchController = searchController
+
+        navigationItem.searchController = searchController
+    }
+
+    private func layout() -> UICollectionViewCompositionalLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalWidth(1 / 3))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1 / 3))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+
+        let section = NSCollectionLayoutSection(group: group)
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+
+        return layout
     }
 }
 
@@ -37,40 +73,5 @@ extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let search = searchController.searchBar.text
         print("search: \(search)")
-    }
-}
-
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let interItemSpacing: CGFloat = 1
-        let width = (collectionView.bounds.width - interItemSpacing * 2) / 3
-        let height = width
-
-        return CGSize(width: width, height: height)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
-    }
-}
-
-extension SearchViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCell.identifier, for: indexPath) as? ResultCell else {
-            return UICollectionViewCell()
-        }
-
-        let imageName = "animal\(indexPath.item + 1)"
-        cell.configure(imageName)
-
-        return cell
     }
 }

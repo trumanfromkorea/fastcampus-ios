@@ -10,42 +10,46 @@ import UIKit
 class HomeViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
 
+    let list: [String] = (1 ... 24).map { "animal\($0)" }
+
+    var dataSource: UICollectionViewDiffableDataSource<Section, String>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // data, presentation, layout
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        // diffable datasource
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identifier, for: indexPath) as? HomeCell else {
+                return nil
+            }
 
-        // cell 크기 지정하는대로 출력하기 위함
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = .zero
-        }
-    }
-}
+            cell.configure(itemIdentifier)
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        let height: CGFloat = width
+            return cell
+        })
 
-        return CGSize(width: width, height: height)
-    }
-}
+        // snapshot
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.home])
+        snapshot.appendItems(list, toSection: .home)
+        dataSource.apply(snapshot)
 
-extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        // layout
+        collectionView.collectionViewLayout = layout()
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identifier, for: indexPath) as? HomeCell else {
-            return UICollectionViewCell()
-        }
+    private func layout() -> UICollectionViewCompositionalLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let imageName = "animal\(indexPath.item + 1)"
-        cell.configure(imageName)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: itemSize, subitem: item, count: 1)
 
-        return cell
+        group.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 0, bottom: 1, trailing: 0)
+
+        let section = NSCollectionLayoutSection(group: group)
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+
+        return layout
     }
 }
