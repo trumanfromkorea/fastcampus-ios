@@ -60,15 +60,15 @@ class FrameworkListViewController: UIViewController {
         // fractionalWidth, Height -> 할당된 group 의 사이즈
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         // fractional -> section 의 size
         // 높이는 너비의 1/3 쓴것
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.33))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15 )
-        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
+
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
@@ -79,5 +79,11 @@ extension FrameworkListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let framework = list[indexPath.item]
         print(">>> selected: \(framework.name)")
+
+        // 우리가 띄우고 싶은것 FrameworkDetailViewController
+
+        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: FrameworkDetailViewController.identifier) as! FrameworkDetailViewController
+        present(vc, animated: true)
     }
 }
