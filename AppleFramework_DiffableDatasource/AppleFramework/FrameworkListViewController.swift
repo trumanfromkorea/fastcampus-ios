@@ -84,6 +84,7 @@ extension FrameworkListViewController: UICollectionViewDelegate {
 
         let storyboard = UIStoryboard(name: "Detail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: FrameworkDetailViewController.identifier) as! FrameworkDetailViewController
+        vc.framework = framework
         present(vc, animated: true)
     }
 }
