@@ -34,7 +34,17 @@ class QuickFocusListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        
+        // initializing CollectionView
+        initCollectionView()
+        
+        // title type
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    private func initCollectionView() {
         // presentation
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickFocusCell.identifier, for: indexPath) as? QuickFocusCell else {
@@ -68,9 +78,7 @@ class QuickFocusListViewController: UIViewController {
 
         // layout
         collectionView.collectionViewLayout = layout()
-        
-        // title type
-        self.navigationItem.largeTitleDisplayMode = .never
+
     }
 
     private func layout() -> UICollectionViewCompositionalLayout {

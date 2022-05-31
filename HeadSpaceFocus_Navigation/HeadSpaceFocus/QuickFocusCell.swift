@@ -9,12 +9,11 @@ import UIKit
 
 class QuickFocusCell: UICollectionViewCell {
     static let identifier = "QuickFocusCell"
-    
-    
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
+
+    @IBOutlet var thumbnailImageView: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
+
     func configure(_ quickFocus: QuickFocus) {
         thumbnailImageView.image = UIImage(named: quickFocus.imageName)
         titleLabel.text = quickFocus.title
