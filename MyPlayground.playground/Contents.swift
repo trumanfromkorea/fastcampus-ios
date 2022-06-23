@@ -1,43 +1,29 @@
+import Foundation
 import UIKit
 
-protocol HasArea {
-    var area: Double { get }
+
+var commonFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ko")
+    formatter.dateFormat = "YYYY-MM-dd"
+    return formatter
 }
 
-// HasArea 준수
-class Circle: HasArea {
-    let pi = 3.1415927
-    var radius: Double
-    var area: Double { return pi * radius * radius }
-    init(radius: Double) { self.radius = radius }
+var KST: Date {
+    let dateString = commonFormatter.string(from: Date())
+    let accurateDay = commonFormatter.date(from: dateString)!
+
+    return accurateDay
 }
 
-// HasArea 준수
-class Country: HasArea {
-    var area: Double
-    init(area: Double) { self.area = area }
+var today = KST
+var dateList = [String]()
+
+var weekBeforeToday = Calendar.current.date(byAdding: .day, value: -6, to: KST)!
+
+for i in 0 ..< 7 {
+    let incrementDate = Calendar.current.date(byAdding: .day, value: i, to: weekBeforeToday)
+    dateList.append(commonFormatter.string(from: incrementDate!))
 }
 
-// HasArea 미준수
-class Animal {
-    var legs: Int
-    init(legs: Int) { self.legs = legs }
-}
-
-// 공유된 기본 클래스가 없지만 AnyObject 로 배열 생성
-let objects: [AnyObject] = [
-    Circle(radius: 2.0),
-    Country(area: 243_610),
-    Animal(legs: 4)
-]
-
-for object in objects {
-    if let objectWithArea = object as? HasArea {
-        print("Area is \(objectWithArea.area)")
-    } else {
-        print("Something that doesn't have an area")
-    }
-}
-// Area is 12.5663708
-// Area is 243610.0
-// Something that doesn't have an area
+print(dateList)
