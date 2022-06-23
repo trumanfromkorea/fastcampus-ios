@@ -6,8 +6,8 @@
 //
 
 import Combine
+import Kingfisher
 import UIKit
-// import Kingfisher
 
 class UserProfileViewController: UIViewController {
     // Setup UI
@@ -73,7 +73,11 @@ class UserProfileViewController: UIViewController {
         loginLabel.text = user.login
         followerLabel.text = "followers \(user.followers)"
         followingLabel.text = "following \(user.following)"
-        thumbnail.image = nil
+
+        // image url
+        // url -> image
+
+        thumbnail.kf.setImage(with: user.avatarUrl)
     }
 }
 
@@ -95,7 +99,7 @@ extension UserProfileViewController: UISearchBarDelegate {
         let header: [String: String] = ["Content-Type": "application/json"]
 
         var urlComponents = URLComponents(string: base + path)!
-        
+
         // query 추가
         let queryItems = params.map { (key: String, value: String) in
             URLQueryItem(name: key, value: value)
@@ -124,10 +128,16 @@ extension UserProfileViewController: UISearchBarDelegate {
             .receive(on: RunLoop.main)
             .sink { completion in
                 print("completion: \(completion)")
+
+                switch completion {
+                case let .failure(error):
+                    self.user = nil
+                case .finished:
+                    break
+                }
             } receiveValue: { user in
                 self.user = user
             }
             .store(in: &subscriptions)
-
     }
 }
