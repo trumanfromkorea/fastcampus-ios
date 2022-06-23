@@ -16,6 +16,8 @@ class UserProfileViewController: UIViewController {
     // Search Control -> network
     // Network
 
+    let network = NetworkService(configuration: .default)
+
     // private(set) -> set 은 private, 외부에서 get 은 가능
     @Published private(set) var user: UserProfile?
     var subscriptions = Set<AnyCancellable>()
@@ -93,42 +95,17 @@ extension UserProfileViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text, !keyword.isEmpty else { return }
 
-        let base = "https://api.github.com"
-        let path = "/users/\(keyword)"
-        let params: [String: String] = [:]
-        let header: [String: String] = ["Content-Type": "application/json"]
+        let resource = Resource<UserProfile>(
+            base: "https://api.github.com/",
+            path: "users/\(keyword)",
+            params: [:],
+            header: ["Content-Type": "application/json"]
+        )
 
-        var urlComponents = URLComponents(string: base + path)!
-
-        // query 추가
-        let queryItems = params.map { (key: String, value: String) in
-            URLQueryItem(name: key, value: value)
-        }
-        urlComponents.queryItems = queryItems
-
-        // header 추가
-        var request = URLRequest(url: urlComponents.url!)
-        header.forEach { (key: String, value: String) in
-            request.addValue(value, forHTTPHeaderField: key)
-        }
-
-        URLSession.shared
-            .dataTaskPublisher(for: request)
-            .tryMap { result -> Data in
-                // statusCode 검사
-                guard let response = result.response as? HTTPURLResponse,
-                      (200 ..< 300).contains(response.statusCode) else {
-                    let response = result.response as? HTTPURLResponse
-                    let statusCode = response?.statusCode ?? -1
-                    throw NetworkError.responseError(statusCode: statusCode)
-                }
-                return result.data
-            }
-            .decode(type: UserProfile.self, decoder: JSONDecoder())
+        // Network Service
+        network.load(resource)
             .receive(on: RunLoop.main)
             .sink { completion in
-                print("completion: \(completion)")
-
                 switch completion {
                 case let .failure(error):
                     self.user = nil

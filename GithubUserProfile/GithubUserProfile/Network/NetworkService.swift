@@ -5,10 +5,10 @@
 //  Created by joonwon lee on 2022/05/25.
 //
 
-import Foundation
 import Combine
+import Foundation
 
-///// Defines the Network service errors.
+// Defines the Network service errors.
 enum NetworkError: Error {
     case invalidRequest
     case invalidResponse
@@ -18,21 +18,21 @@ enum NetworkError: Error {
 
 final class NetworkService {
     let session: URLSession
-    
+
     init(configuration: URLSessionConfiguration) {
         session = URLSession(configuration: configuration)
     }
-    
+
     func load<T>(_ resource: Resource<T>) -> AnyPublisher<T, Error> {
         guard let request = resource.urlRequest else {
             return .fail(NetworkError.invalidRequest)
         }
-        
+
         return session
             .dataTaskPublisher(for: request)
             .tryMap { result -> Data in
                 guard let response = result.response as? HTTPURLResponse,
-                      (200..<300).contains(response.statusCode)
+                      (200 ..< 300).contains(response.statusCode)
                 else {
                     let response = result.response as? HTTPURLResponse
                     let statusCode = response?.statusCode ?? -1

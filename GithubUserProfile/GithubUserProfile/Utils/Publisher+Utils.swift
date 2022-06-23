@@ -5,11 +5,10 @@
 //  Created by joonwon lee on 2022/05/28.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 extension Publisher {
-
     static func empty() -> AnyPublisher<Output, Failure> {
         return Empty().eraseToAnyPublisher()
     }
