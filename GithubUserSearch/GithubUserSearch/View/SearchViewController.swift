@@ -9,6 +9,8 @@ import Combine
 import UIKit
 
 class SearchViewController: UIViewController {
+    let network = NetworkService(configuration: .default)
+
     @Published private(set) var users: [SearchResult] = []
     var subscriptions = Set<AnyCancellable>()
 
@@ -84,44 +86,36 @@ class SearchViewController: UIViewController {
 
     // - 사용자 인터랙션 대응
     //   - searchControl 에서 텍스트 -> 네트워크 요청
-}
-
-extension SearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let keyword = searchController.searchBar.text
-        print("search: \(keyword)")
-    }
-}
-
-extension SearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("button clicked \(searchBar.text)")
-
-        guard let keyword = searchBar.text, !keyword.isEmpty else { return }
+    private func sendRequest(_ keyword: String?) {
+        guard let keyword = keyword, !keyword.isEmpty else { return }
 
         let base = "https://api.github.com/"
         let path = "search/users"
         let params: [String: String] = ["q": keyword]
         let header: [String: String] = ["Content-Type": "application/json"]
 
-        var urlComponents = URLComponents(string: base + path)!
-        let queryItems = params.map { (key: String, value: String) in
-            URLQueryItem(name: key, value: value)
-        }
-        urlComponents.queryItems = queryItems
+        let resource = Resource<SearchUserResponse>(
+            base: base, path: path, params: params, header: header
+        )
 
-        var request = URLRequest(url: urlComponents.url!)
-        header.forEach { (key: String, value: String) in
-            request.addValue(value, forHTTPHeaderField: key)
-        }
-
-        URLSession.shared.dataTaskPublisher(for: request)
-            .map { $0.data }
-            .decode(type: SearchUserResponse.self, decoder: JSONDecoder())
+        network
+            .load(resource)
             .map { $0.items }
             .replaceError(with: [])
             .receive(on: RunLoop.main)
             .assign(to: \.users, on: self)
             .store(in: &subscriptions)
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        sendRequest(searchController.searchBar.text)
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        sendRequest(searchBar.text)
     }
 }
